@@ -1,0 +1,21 @@
+body {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+p {
+  text-align: justify;
+  margin: 15px;
+ 
+}
+li ul {
+  list-style: none;
+}
+img {
+  margin: 15px;
+}
+li p{
+  margin: 0px;
+}
+pre {
+  margin-left: 35px;
+}
