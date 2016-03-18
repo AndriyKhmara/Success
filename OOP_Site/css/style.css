@@ -43,6 +43,7 @@ header{
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	background-size: cover;
+
 }
 nav{
 	height: 100px;
@@ -112,7 +113,6 @@ p.auth { color: #8c9398;
 	font-size: 14px; 
 	text-align: center;
 }
-
 h2 { font-size: 15px; 
 	color: #353535; 
 	text-transform: uppercase; 
@@ -124,7 +124,7 @@ h2::after { content: " ";
 	display: block; 
 	width: 35px; 
 	margin: 25px auto; 
-}
+}	
 .section-padding { 
 	padding: 90px 0 100px 
 }
