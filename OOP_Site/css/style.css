@@ -33,7 +33,7 @@ div.row p {
 	top: -150px;
 	overflow: hidden;
 	padding: 10px;
-    font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 /*-----------------------------------HEADER-----------------------------------*/
 header{
@@ -69,20 +69,20 @@ div.content h2{
 	display: block;
 	text-transform: uppercase;
 	text-align: center;		
-	margin-top: 200px;
+	margin-top: 90px;
 	color: black;
-	font: bold 55px Arial, Helvetica, sans-serif;
-	
-}
+ 	font: bold 55px Arial, Helvetica, sans-serif;;
+	}
 div.content h3{
-	color: black;
+	color: white;
 	width: 400px;
 	margin: 10px auto;
 	display: block;	
 	text-align: center;
 	font-weight: 100;	
-	margin-bottom: 250px;
-	font: bold 35px Arial, Helvetica, sans-serif;
+  margin-top: 100px;
+	margin-bottom: 50px;
+	font: bold 45px Arial, Helvetica, sans-serif;
 }
 
 /*----------------------------------Patterns----------------------------------*/
