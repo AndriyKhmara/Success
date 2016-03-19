@@ -1,12 +1,33 @@
 body {
-	background-image: url(../img/bg.png);
+	background-image: url('../img/bg.png');
 	min-height: 768px;
-	min-width: 1024px;
+	min-width: 1600px;
+	margin: 0;
 }
-div.test {
-	
-	
+nav{
+	height: 100px;
+	background-color: rgba(71, 82, 89, 0.85);
 }
+header ul{
+	margin: 33px auto;
+	text-align: right;
+	float: left;
+}
+header ul li{
+	display: inline-block;
+	color: rgba(240, 241, 241, 0.9);
+	border: 2px solid transparent;
+	text-transform: uppercase;
+	font: 14px 'Times New Roman',Times,sans-serif;
+}
+header ul li a{
+	text-decoration: none;
+	color: rgba(240, 241, 241, 0.9);
+}
+header ul li a:hover{
+	background:rgba(30, 82, 89, 1);
+}
+
 div.content {
 	width: 70%;
 	text-align: justify;
@@ -15,7 +36,7 @@ div.content {
 	display: inline-block;
 	position: relative;
 	left: 10%;
-	margin: 50px auto 0;
+	
 }
 #button {	
 	position: fixed;
@@ -36,4 +57,25 @@ div.content {
    	0 3px 5px rgba(0,1,6,.5),
    	0 0 1px 1px rgba(0,1,6,.2);
   	transition: .2s ease-in-out;
+}
+nav.prot_1 ul li {
+	margin-left: 160px;
+}
+nav.pattern ul li {
+	margin-left: 154px;
+}
+nav.builder_p ul li {
+	margin-left: 151px;
+}
+nav.factory_method ul li {
+	margin-left: 151px;
+}
+nav.prototype ul li {
+	margin-left: 155px;
+}
+nav.singleton ul li {
+	margin-left: 155px;
+}
+nav.final ul li {
+	margin-left: 158px;
 }
