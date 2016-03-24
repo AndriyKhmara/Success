@@ -9,7 +9,10 @@
 </head>
 <body>
 	<div class="content">
-
+		<h1>Transactions</h1>
+		<p>The primary tool for handling concurrency in enterprise applications is the transaction. The word “transaction” often brings to mind an exchange of money or goods. Walking up to an ATM machine, entering your PIN, and withdrawing cash is a transaction. Paying the $3 toll at the Golden Gate Bridge is a transaction. Buying a beer at the local pub is a transaction.</p>
+		<p>Looking at typical financial dealings such as these provides a good definition for the term. First, a transaction is a bounded sequence of work, with both start and endpoints well defined. An ATM transaction begins when the card is inserted and ends when cash is delivered or an inadequate balance is discovered. Second, all participating resources are in a consistent state both when the transaction begins and when the transaction ends. A man purchasing a beer has a few bucks less in his wallet but has a nice pale ale in front of him. The sum value of his assets hasn’t changed. It’s the same for the pub—pouring free beer would be no way to run a business.</p>
+		<p>In addition, each transaction must complete on an all-or-nothing basis. The bank can’t subtract from an account holder’s balance unless the ATM machine actually delivers the cash. While the human element might make this last property optional during the above transactions, there is no reason software can’t make a guarantee on this front.</p>
 	</div>
 </body>
 <footer>
