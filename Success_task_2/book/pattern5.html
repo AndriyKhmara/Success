@@ -4,18 +4,87 @@
       <!--meta charset="UTF-8" /-  deleted because us HTML5 have this is default -->
       <meta name="description" content="Patterns of Enterprise Application Architecture"/>
       <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
-      <link rel="stylesheet" href="css/bookStyle.css"/>
+      <link rel="stylesheet" href="../css/bookStyle.css"/>
       <title>Patterns of Enterprise Application Architecture </title>
 </head>
 <body>
 	<div class="content">
-		<h1>Transactions</h1>
+        <div class="content_h"><h1>Transactions</h1></div>
 		<p>The primary tool for handling concurrency in enterprise applications is the transaction. The word “transaction” often brings to mind an exchange of money or goods. Walking up to an ATM machine, entering your PIN, and withdrawing cash is a transaction. Paying the $3 toll at the Golden Gate Bridge is a transaction. Buying a beer at the local pub is a transaction.</p>
 		<p>Looking at typical financial dealings such as these provides a good definition for the term. First, a transaction is a bounded sequence of work, with both start and endpoints well defined. An ATM transaction begins when the card is inserted and ends when cash is delivered or an inadequate balance is discovered. Second, all participating resources are in a consistent state both when the transaction begins and when the transaction ends. A man purchasing a beer has a few bucks less in his wallet but has a nice pale ale in front of him. The sum value of his assets hasn’t changed. It’s the same for the pub—pouring free beer would be no way to run a business.</p>
 		<p>In addition, each transaction must complete on an all-or-nothing basis. The bank can’t subtract from an account holder’s balance unless the ATM machine actually delivers the cash. While the human element might make this last property optional during the above transactions, there is no reason software can’t make a guarantee on this front.</p>
+        <h2>ACID</h2>
+		<p>Software transactions are often described in terms of the <strong>ACID</strong> properties:</p>
+		<ul>
+			<li><strong>Atomicity</strong>: Each step in the sequence of actions performed within the boundaries of a transaction must complete successfully or all work must roll back. Partial completion is not a transactional concept. Thus, if Martin is transferring some money from his savings to his checking account and the server crashes after he’s withdrawn the money from his savings, the system behaves as if he never did the withdrawal. Committing says both things occurred; a roll back says neither occurred. It has to be both or neither.</li>
+			<li><strong>Consistency</strong>: A system’s resources must be in a consistent, noncorrupt state at both the start and the completion of a transaction.</li>
+			<li><strong>Isolation</strong>: The result of an individual transaction must not be visible to any other open transactions until that transaction commits successfully.</li>
+			<li><strong>Durability</strong>: Any result of a committed transaction must be made permanent. This translates to “Must survive a crash of any sort.”</li>
+		</ul>
+        <h2>Transactional Resources</h2>
+		<p>Most enterprise applications run into transactions in terms of databases. But there are plenty of other things that can be controlled using transactions, such as message queues, printers, and ATMs. As a result, technical discussions of transactions use the term “transactional resource” to mean anything that’s transactional—that is, that uses transactions to control concurrency. “Transactional resource” is a bit of a mouthful, so we just use “database,” since that’s the most common case. But when we say “database,” the same applies for any other transactional resource.</p>
+		<p>To handle the greatest throughput, modern transaction systems are designed to keep transactions as short as possible. As a result the general advice is to never make a transaction span multiple requests. A transaction that spans multiple requests is generally known as a <strong>long transaction</strong>.</p>
+		<p>For this reason a common approach is to start a transaction at the beginning of a request and complete it at the end. This <sterong>request transaction</sterong> is a nice simple model, and a number of environments make it easy to do declaratively, by just tagging methods as transactional.</p>
+		<p>A variation on this is to open a transaction as late as possible. With a <sterong>late transaction</sterong> you may do all the reads outside it and only open it up when you do updates. This has the advantage of minimizing the time spent in a transaction. If there’s a lengthy time lag between the opening of the transaction and the first write, this may improve liveness. However, this means that you don’t have any concurrency control until you begin the transaction, which leaves you open to inconsistent reads. As a result it’s usually not worth doing this unless you have very heavy contention or you’re doing it anyway because of business transactions that span multiple requests (which is the next topic).</p>
+		<p>When you use transactions, you need be somewhat aware of what exactly is being locked. For many database actions the transaction system locks the rows involved, which allows multiple transactions to access the same table. However, if a transaction locks a lot of rows in a table, then the database has more locks than it can handle and escalates the locking to the entire table—locking out other transactions. This <strong>lock escalation</strong> can have a serious effect on concurrency, and it’s particularly why you shouldn’t have some “object” table for data at the domain’s Layer Supertype (475) level. Such a table is a prime candidate for lock escalation, and locking that table shuts everybody else out of the database.</p>
+		<h2>Reducing Transaction Isolation for Liveness</h2>
+		<p>It’s common to restrict the full protection of transactions so that you can get better liveness. This is particularly the case when it comes to handling isolation. If you have full isolation, you get <strong>serializable</strong> transactions. Transactions are serializable if they can be executed concurrently and you get a result that’s the same as you get from some sequence of executing the transactions serially. Thus, if we take our earlier example of Martin counting his files, serializability guarantees that he gets a result that corresponds to completing his transaction either entirely before David’s transaction starts (twelve) or entirely after David’s finishes (seventeen). Serializability can’t guarantee which result, as in this case, but at least it guarantees a correct one.</p>
+		<p>Most transactional systems use the SQL standard which defines four levels of isolation. Serializable is the strongest level, and each level below allows a particular kind of inconsistent read to enter the picture. We’ll explore these with the example of Martin counting files while David modifies them. There are two packages: locking and multiphase. Before David’s update there are seven files in the locking package and five in the multiphase package; after his update there are nine in the locking package and eight in the multiphase package. Martin looks at the locking package and David then updates both; then Martin looks at the multiphase package.</p>
+		<p>If the isolation level is serializable, the system guarantees that Martin’s answer is either twelve or seventeen, both of which are correct. Serializability can’t guarantee that every run through this scenario will give the same result, but it always gets either the number before David’s update or the number afterwards.</p>
+		<p>The first isolation level below serializable is <strong>repeatable read</strong>, which allows <strong>phantoms</strong>. Phantoms occur when you add some elements to a collection and the reader sees only some of them. The case here is that Martin looks at the files in the locking package and sees seven. David then commits his transaction, after which Martin looks at the multiphase package and sees eight. Hence, Martin gets an incorrect result. Phantoms occur because they are valid for some of Martin’s transaction but not all of it, and they’re always things that are inserted.</p>
+		<p>Next down the list is the isolation level of <strong>read committed</strong>, which allows <strong>unrepeatable reads</strong>. Imagine that Martin looks at a total rather than the actual files. An unrepeatable read allows him to read a total of seven for locking. Next David commits; then he reads a total of eight for multiphase. It’s called an unrepeatable read because, if Martin were to reread the total for the locking package after David committed, he would get the new number of nine. His original read of seven can’t be repeated after David’s update. It’s easier for databases to spot unrepeatable reads than phantoms, so the repeatable read gives you more correctness than read committed but less liveness.</p>
+		<p>The lowest level of isolation is <strong>read uncommitted</strong>, which allows <strong>dirty reads</strong>. At read uncommitted you can read data that another transaction hasn’t actually committed yet. This causes two kinds of errors. Martin might look at the locking package when David adds the first of his files but before he adds the second. As a result he sees eight files in the locking package. The second kind of error comes if David adds his files but then rolls back his transaction—in which case Martin sees files that were never really there.</p>
+		<table>
+			<caption><strong>Table 5.1. Isolation Levels and the Inconsistent Read Errors They Allow</strong></caption>
+			<tr>
+				<th>Isolation Level</th>
+				<th>Dirty Read</th>
+				<th>Unrepeatable Read</th>
+				<th>Phantom</th>
+			</tr>
+			<tr>
+				<td>Read Uncommitted</td>
+				<td>Yes</td>
+				<td>Yes</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>Read Committed</td>
+				<td>No</td>
+				<td>Yes</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>Repeatable Read</td>
+				<td>No</td>
+				<td>No</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>Serializable</td>
+				<td>No</td>
+				<td>No</td>
+				<td>No</td>
+			</tr>
+		</table>
+		<p>To be sure of correctness you should always use the serializable isolation level. The problem is that choosing serializable really messes up the liveness of a system, so much so that you often have to reduce serializability in order to increase throughput. You have to decide what risks you want to take and make your own trade-off of errors versus performance.</p>
+		<p>You don’t have to use the same isolation level for all transactions, so you should look at each transaction and decide how to balance liveness versus correctness for it.</p>
+		<h2>Business and System Transactions</h2>
+		<p>What we’ve talked about so far, and most of what most people talk about, is what we call system transactions, or transactions supported by RDBMS systems and transaction monitors. A database transaction is a group of SQL commands delimited by instructions to begin and end it. If the fourth statement in the transaction results in an integrity constraint violation, the database must roll back the effects of the first three statements and notify the caller that the transaction has failed. If all four statements had completed successfully all would have been made visible to other users at the same time rather than one at a time. RDBMS systems and application server transaction managers are so commonplace that they can pretty much be taken for granted. They work well and are well understood by application developers.</p>
+		<p>However, a system transaction has no meaning to the user of a business system. To an online banking system user a transaction consists of logging in, selecting an account, setting up some bill payments, and finally clicking the OK button to pay the bills. This is what we call a <strong>business transaction</strong>, and that it displays the same ACID properties as a system transaction seems a reasonable expectation. If the user cancels before paying the bills, any changes made on previous screens should be canceled. Setting up payments shouldn’t result in a system-visible balance change until the OK button is pressed.</p>
+		<p>The obvious answer to supporting the ACID properties of a business transaction is to execute the entire business transaction within a single system transaction. Unfortunately business transactions often take multiple requests to complete, so using a single system transaction to implement one results in a long system transaction. Most transaction systems don’t work very efficiently with long transactions.</p>
+		<p>This doesn’t mean that you should never use long transactions. If your database has only modest concurrency needs, you may well be able to get away with it. And if you can get away with it, we suggest you do it. Using a long transaction means you avoid a lot of awkward problems. However, the application won’t be scalable because long transactions will turn the database into a major bottleneck. In addition, the refactoring from long to short transactions is both complex and not well understood.</p>
+		<p>For this reason many enterprise applications can’t risk long transactions. In this case you have to break the business transaction down into a series of short transactions. This means that you are left to your own devices to support the ACID properties of business transactions between system transactions—a problem we call <strong>offline concurrency</strong>. System transactions are still very much part of the picture. Whenever the business transaction interacts with a transactional resource, such as a database, that interaction will execute within a system transaction in order to maintain the integrity of that resource. However, as you’ll read below it’s not enough to string together a series of system transactions to properly support a business transaction. The business application must provide a bit of glue between them.</p>
+		<p>Atomicity and durability are the ACID properties most easily supported for business transactions. Both are supported by running the commit phase of the business transaction, when the user hits Save, within a system transaction. Before the session attempts to commit all its changes to the record set, it first opens a system transaction. The system transaction guarantees that the changes will commit as a unit and will be made permanent. The only potentially tricky part here is maintaining an accurate change set during the life of the business transaction. If the application uses a Domain Model (116), a Unit of Work (184) can track changes accurately. Placing business logic in a Transaction Script (110) requires a manual tracking of changes, but that’s probably not much of a problem as the use of transaction scripts implies rather simple business transactions.</p>
+		<p>The tricky ACID property to enforce with business transactions is isolation. Failures of isolation lead to failures of consistency. Consistency dictates that a business transaction not leave the record set in an invalid state. Within a single transaction the application’s responsibility in supporting consistency is to enforce all available business rules. Across multiple transactions the application’s responsibility is to ensure that one session doesn’t step all over another session’s changes, leaving the record set in the invalid state of having lost a user’s work.</p>
+		<p>As well as the obvious problems of clashing updates, there are the more subtle problems of inconsistent reads. When data is read over several system transactions, there’s no guarantee that it will be consistent. The different reads can even introduce data in memory that’s sufficiently inconsistent to cause application failures.</p>
+		<p>Business transactions are closely tied to sessions. In the user’s view each session is a sequence of business transactions (unless they’re only reading data), so we usually make the assumption that all business transactions execute in a single client session. While it’s certainly possible to design a system that has multiple sessions for one business transaction, that’s a very good way of getting yourself badly confused—so we’ll assume that you won’t do that.</p>
+	</div>
+    <div>
+		<a href='#' class='button_home'>HOME</a>
+	</div>
+    <div class="p_footer">
+	    <p>Website &copy 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
 	</div>
 </body>
-<footer>
-	
-</footer>
 </html>
