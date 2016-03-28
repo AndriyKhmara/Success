@@ -14,6 +14,10 @@ table, th, td {
     border: 1px solid black;
     padding: 0.5em;
 }
+ul {
+	list-style: circle outside;
+	margin-right:2em;
+}
 .button_home {
    border: 1px solid #151058;
    background: #355088;
