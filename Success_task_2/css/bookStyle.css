@@ -6,9 +6,7 @@ body {
 }
 .wrapper {
     width:80%;
-    /*position: relative;*/
-    /*top: 3.5em;*/
-	margin: 1.5em auto;
+	margin: 1.5em auto 0em;
     padding: 1.5em 1.5em;
 	background:#FEFFE9;
 	box-shadow: 0px 5px 50px  #F19634;
@@ -35,7 +33,7 @@ body {
 .pat_header h1, .pat_header p {
     text-align: center;
     margin: 0em;
-    padding: 0.1em;
+    padding: 0em;
 }
 table {
     border-collapse: collapse;
@@ -51,46 +49,49 @@ ul {
 	list-style: circle outside;
 	margin-right:2em;
 }
-footer > section > p {
-    margin: 0px auto;
+.pat_footer {
+    width: 80%;
+	margin: 0em auto 1.5em;
+    padding: .5em 1.5em;
 	background:#E5C44A;
-	padding: 0.5em;
-	padding-bottom: 20px;
-	box-shadow: 0px 2px 50px  white;
+    background: linear-gradient(to bottom, #E4E537, #FB5A32);
+	box-shadow: 0px 5px 50px  #E5C44A;
+    text-align: center;
 	color:#424242;
-	height:2em;
+    font-family:'PT Sans', sans-serif;
+    font-size: 1em;
+    font-style: italic;
 }
-footer > section > p a {
-    color: #424242; /* Цвет обычной ссылки */
+.pat_footer p {
+    margin: 0em auto;
+}
+.pat_footer a, .pat_footer a:visited {
+    color: white; /* Цвет обычной и посещенной ссылки */
     text-decoration:none;
 }
-footer > section > p a:hover {
-    color: #FF4A07; /*Color link in sight*/
-}
-footer > section > p a:visited {
-    color: #424242; /* Цвет посещенной ссылки */
-    text-decoration:none;
+.pat_footer a:hover {
+    color: #8B0404; /*Color link in sight*/
 }
 .button_home {
    border: 1px solid #151058;
-   background: #355088;
-   background: -webkit-gradient(linear, left top, left bottom, from(#355088), to(#7184ab));
-   background: -webkit-linear-gradient(top, #355088, #7184ab);
-   background: -moz-linear-gradient(top, #355088, #7184ab);
-   background: -ms-linear-gradient(top, #355088, #7184ab);
-   background: -o-linear-gradient(top, #355088, #7184ab);
-   background-image: -ms-linear-gradient(top, #355088 0%, #7184ab 100%);
-   padding: 5px 13px;
+   background: #E5C44A;
+   background: -webkit-gradient(linear, left top, left bottom, from(#FF4A07), to(#E5C44A));
+   background: -webkit-linear-gradient(top, #FF4A07, #E5C44A);
+   background: -moz-linear-gradient(top, #FF4A07, #E5C44A);
+   background: -ms-linear-gradient(top, #FF4A07, #E5C44A);
+   background: -o-linear-gradient(top, #FF4A07, #E5C44A);
+   background-image: -ms-linear-gradient(top, #FF4A07 0%, #E5C44A 100%);
+   padding: 5px 10px;
    -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
-   border-radius: 5px;
+   border-radius: 8px;
    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #e7e7ee 0 1px 0;
-   color: #dfe3ee;
-   font-size: 10px;
-   font-family: helvetica, serif;
+   text-shadow: #a0a0a0 0 1px 0;
+   color: #424242;
+   font-size: 1em;
+   font-family: 'PT Sans Narrow', sans-serif;
    text-decoration: none;
    vertical-align: middle;
    position: fixed;
@@ -98,26 +99,26 @@ footer > section > p a:visited {
    right: 1em;
    }
 .button_home:hover {
-   border: 2px solid #a19fbc;
+   border: 1px solid #e7e7ee;
    text-shadow: #e7e7ee 0 1px 0;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
-   background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
-   background: -moz-linear-gradient(top, #65a9d7, #3e779d);
-   background: -ms-linear-gradient(top, #65a9d7, #3e779d);
-   background: -o-linear-gradient(top, #65a9d7, #3e779d);
-   background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
+   background: #FF4A07;
+   background: -webkit-gradient(linear, left top, left bottom, from(#FF4A07), to(#E4E537));
+   background: -webkit-linear-gradient(top, #FF4A07, #E4E537);
+   background: -moz-linear-gradient(top, #FF4A07, #E4E537);
+   background: -ms-linear-gradient(top, #FF4A07, #E4E537);
+   background: -o-linear-gradient(top, #FF4A07, #E4E537);
+   background-image: -ms-linear-gradient(top, #FF4A07 0%, #E4E537 100%);
    color: #8B0404;
    }
 .button_home:active {
    text-shadow: #e7e7ee 0 1px 0;
-   border: 2px solid #a19fbc;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
-   color: #fff;
+   border: 1px solid #e7e7ee;
+   background: #FF4A07;
+   background: -webkit-gradient(linear, left top, left bottom, from(#FF4A07), to(#E4E537));
+   background: -webkit-linear-gradient(top, #FF4A07, #E4E537);
+   background: -moz-linear-gradient(top, #FF4A07, #E4E537);
+   background: -ms-linear-gradient(top, #FF4A07, #E4E537);
+   background: -o-linear-gradient(top, #FF4A07, #E4E537);
+   background-image: -ms-linear-gradient(top, #FF4A07 0%, #E4E537 100%);
+   color: #e7e7ee;
    }
