@@ -1,0 +1,11 @@
+body {
+	min-height: 1024px;
+	min-width: 600px;
+	/*margin: 0 auto;*/
+	background:#999999;
+	/*background-image: url('../img/bg_tx.png');
+	background-repeat: repeat;*/
+}
+header {
+    
+}
