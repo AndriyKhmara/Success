@@ -1,82 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
       <meta charset="UTF-8" />
       <meta name="description" content="Patterns of Enterprise Application Architecture"/>
       <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
-      <link rel="stylesheet" href="css/bookStyle.css"/>
+      <link rel="stylesheet" href="../css/bookStyle.css"/>
       <link href='https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
       <title>Patterns of Enterprise Application Architecture </title>
-  </head>
-   <body>
-    <article class="wrapper">
-        <section class="pat_header">
+    </head>
+    <body>
+        <main>
+        <header>
             <h1>Patterns of Enterprise Application Architecture</h1>
             <p>Chapter 5. Concurrency</p>
-        </section>
+        </header>
+        <nav>
+                <li class="menu_li"><a href="../index.html" title="Main page">HOME</a></li>
+				<li class="menu_li"><a href="../book/pattern1.html" title="go to Pattern 1" rel="details">PATTERN 1</a></li>
+				<li class="menu_li"><a href="../book/pattern2.html" title="go to Pattern 2" rel="details">PATTERN 2</a></li>
+				<li class="menu_li"><a href="../book/pattern3.html" title="go to Pattern 3" rel="details">PATTERN 3</a></li>
+				<li class="menu_li"><a href="../book/pattern4.html" title="go to Pattern 4" rel="details">PATTERN 4</a></li>
+				<li class="menu_li"><a href="../book/pattern5.html" title="go to Pattern 5" rel="details">PATTERN 5</a></li>
+				<li class="menu_li"><a href="../book/pattern6.html" title="go to Pattern 6" rel="details">PATTERN 6</a></li>
+				<li class="menu_li"><a href="../book/pattern7.html" title="go to Pattern 7" rel="details">PATTERN 7</a></li>
+				<li class="menu_li"><a href="../book/pattern8.html" title="go to Pattern 8" rel="details">PATTERN 8</a></li>
+				<li><a href="../book/galery.html" title="go to Galery" rel="details">GALERY</a></li>
+        </nav>
         <section>
             <p>...</p>
-      <h2>Enterprise Applications</h2>
-        <p>Lots of people write computer software, and we call all of it software development. However, there are distinct kinds of software out there,
-        each of which has its own challenges and complexities. This comes out when I talk with some of my friends in the telecom field. In some ways
-        enterprise applications are much easier than telecoms software - we don't have very hard multithreading problems, and we don't have hardware
-        and software integration. But in other ways it's much tougher. Enterprise applications often have complex data-and lots of it-to work on,
-        together with business rules that fail all tests of logical reasoning. Although some techniques and patterns are relevant for all kinds of 
-        software, many are relevant for only one particular branch.</p>
-        <p>In my career I've concentrated on enterprise applications, so my patterns here are all about that. (Other terms for enterprise applications include
-         "information systems" or, for those with a long memory, "data processing.") But what do I mean by the term "enterprise application"? I can't give
-          a precise definition, but I can give some indication of my meaning.</p>
-        <p>I'll start with examples. Enterprise applications include payroll, patient records, shipping tracking, cost analysis, credit scoring, insurance,
-        supply chain, accounting, customer service, and foreign exchange trading. Enterprise applications don't include automobile fuel injection, word 
-        processors, elevator controllers, chemical plant controllers, telephone switches, operating systems, compilers, and games.</p>
-        <p>Enterprise applications usually involve <b>persistent data</b>. The data is persistent because it needs to be around between multiple runs of the program -indeed,
-        it usually needs to persist for several years. Also during this time there will be many changes in the programs that use it. It will often outlast
-        the hardware that originally created much of it, and outlast operating systems and compilers. During that time there'll be many changes to the structure 
-        of the data in order to store new pieces of information without disturbing the old pieces. Even if there's a fundamental change and the company installs
-        a completely new application to handle a job, the data has to be migrated to the new application.</p>
-        <p>There's usually <b>a lot of data</b> - a moderate system will have over 1 GB of data organized in tens of millions of records - so much that managing it is a major
-        part of the system. Older systems used indexed file structures such as IBM's VSAM and ISAM. Modern systems usually use databases, mostly relational databases.
-        The design and feeding of these databases has turned into a subprofession of its own.</p>
-        <p>Usually many people <b>access data concurrently</b>. For many systems this may be less than a hundred people, but for Web-based systems that talk over the Internet 
-        this goes up by orders of magnitude. With so many people there are definite issues in ensuring that all of them can access the system properly. But even without 
-        that many people, there are still problems in making sure that two people don't access the same data at the same time in a way that causes errors. Transaction
-        manager tools handle some of this burden, but often it's impossible to hide this from application developers.</p>
-        <p>With so much data, there's usually <b>a lot of user interface screens</b> to handle it. It's not unusual to have hundreds of distinct screens. Users of enterprise
-        applications vary from occasional to regular, and normally they will have little technical expertise. Thus, the data has to be presented lots of different
-        ways for different purposes. Systems often have a lot of batch processing, which is easy to forget when focusing on use cases that stress user interaction.</p>
-        <p>Enterprise applications rarely live on an island. Usually they need to <b>integrate with other enterprise applications</b> scattered around the enterprise. The various 
-        systems are built at different times with different technologies, and even the collaboration mechanisms will be different: COBOL data files, CORBA, messaging
-        systems. Every so often the enterprise will try to integrate its different systems using a common communication technology. Of course, it hardly ever finishes
-        the job, so there are several different unified  integration schemes in place at once. This gets even worse as businesses seek to integrate with their business partners
-        as well.</p>
-        <p>Even if a company unifies the technology for integration, they run into problems with differences in business process and <b>conceptual dissonance</b> with the data. One 
-        division of the company may think a customer is someone with whom it has a current agreement; another division also counts those that had a contract but don't any
-        longer; another counts product sales but not service sales. That may sound easy to sort out, but when you have hundreds of records in which every field can have 
-        a subtly different meaning, the sheer size of the problem becomes a challenge-even if the only person who knows what the field really means is still with the
-        company. (And, of course, all of this changes without warning.) As a result, data has to be constantly read, munged, and written in all sorts of different
-        syntactic and semantic formats.</p>
-        <p>Then there's the matter of what comes under the term "business logic." I find this a curious term because there are few things that are less logical than
-        business logic. When you build an operating system you strive to keep the whole thing logical. But business rules are just given to you, and without major
-        political effort there's nothing you can do to change them. You have to deal with a haphazard array of strange conditions that often interact with each other
-        in surprising ways. Of course, they got that way for a reason: Some salesman negotiated to have a certain yearly payment two days later than usual because that
-        fit with his customer's accounting cycle and thus won a couple of million dollars in business. A few thousand of these one-off special cases is what leads to the 
-        <b>complex business "illogic" </b>that makes business software so difficult. In this situation you have to organize the business logic as effectively as you can, because
-        the only certain thing is that the logic will change over time.</p>
-        <p>For some people the term "enterprise application" implies a large system. However, it's important to remember that not all enterprise applications are large, 
-        even though they can provide a lot of value to the enterprise. Many people assume that, since small systems aren't large, they aren't worth bothering with, and
-        to some degree there's merit here. If a small system fails, it usually makes less noise than a big system. Still, I think such thinking tends to shortchange the
-        cumulative effect of many small projects. If you can do things that improve small projects, then that cumulative effect can be very significant on an enterprise, 
-        particularly since small projects often have disproportionate value. Indeed, one of the best things you can do is turn a large project into a small one by simplifying 
-        its architecture and process.</p>
-      </section>
-        <section>
-            <a href='#' class='button_home'>HOME</a>
+            <h2>Enterprise Applications</h2>
+                <p>Lots of people write computer software, and we call all of it software development. However, there are distinct kinds of software out there,
+                each of which has its own challenges and complexities. This comes out when I talk with some of my friends in the telecom field. In some ways
+                enterprise applications are much easier than telecoms software - we don't have very hard multithreading problems, and we don't have hardware
+                and software integration. But in other ways it's much tougher. Enterprise applications often have complex data-and lots of it-to work on,
+                together with business rules that fail all tests of logical reasoning. Although some techniques and patterns are relevant for all kinds of 
+                software, many are relevant for only one particular branch.</p>
+                <p>In my career I've concentrated on enterprise applications, so my patterns here are all about that. (Other terms for enterprise applications include
+                "information systems" or, for those with a long memory, "data processing.") But what do I mean by the term "enterprise application"? I can't give
+                a precise definition, but I can give some indication of my meaning.</p>
+                <p>I'll start with examples. Enterprise applications include payroll, patient records, shipping tracking, cost analysis, credit scoring, insurance,
+                supply chain, accounting, customer service, and foreign exchange trading. Enterprise applications don't include automobile fuel injection, word 
+                processors, elevator controllers, chemical plant controllers, telephone switches, operating systems, compilers, and games.</p>
+                <p>Enterprise applications usually involve <b>persistent data</b>. The data is persistent because it needs to be around between multiple runs of the program -indeed,
+                it usually needs to persist for several years. Also during this time there will be many changes in the programs that use it. It will often outlast
+                the hardware that originally created much of it, and outlast operating systems and compilers. During that time there'll be many changes to the structure 
+                of the data in order to store new pieces of information without disturbing the old pieces. Even if there's a fundamental change and the company installs
+                a completely new application to handle a job, the data has to be migrated to the new application.</p>
+                <p>There's usually <b>a lot of data</b> - a moderate system will have over 1 GB of data organized in tens of millions of records - so much that managing it is a major
+                part of the system. Older systems used indexed file structures such as IBM's VSAM and ISAM. Modern systems usually use databases, mostly relational databases.
+                The design and feeding of these databases has turned into a subprofession of its own.</p>
+                <p>Usually many people <b>access data concurrently</b>. For many systems this may be less than a hundred people, but for Web-based systems that talk over the Internet 
+                this goes up by orders of magnitude. With so many people there are definite issues in ensuring that all of them can access the system properly. But even without 
+                that many people, there are still problems in making sure that two people don't access the same data at the same time in a way that causes errors. Transaction
+                manager tools handle some of this burden, but often it's impossible to hide this from application developers.</p>
+                <p>With so much data, there's usually <b>a lot of user interface screens</b> to handle it. It's not unusual to have hundreds of distinct screens. Users of enterprise
+                applications vary from occasional to regular, and normally they will have little technical expertise. Thus, the data has to be presented lots of different
+                ways for different purposes. Systems often have a lot of batch processing, which is easy to forget when focusing on use cases that stress user interaction.</p>
+                <p>Enterprise applications rarely live on an island. Usually they need to <b>integrate with other enterprise applications</b> scattered around the enterprise. The various 
+                systems are built at different times with different technologies, and even the collaboration mechanisms will be different: COBOL data files, CORBA, messaging
+                systems. Every so often the enterprise will try to integrate its different systems using a common communication technology. Of course, it hardly ever finishes
+                the job, so there are several different unified  integration schemes in place at once. This gets even worse as businesses seek to integrate with their business partners
+                as well.</p>
+                <p>Even if a company unifies the technology for integration, they run into problems with differences in business process and <b>conceptual dissonance</b> with the data. One 
+                division of the company may think a customer is someone with whom it has a current agreement; another division also counts those that had a contract but don't any
+                longer; another counts product sales but not service sales. That may sound easy to sort out, but when you have hundreds of records in which every field can have 
+                a subtly different meaning, the sheer size of the problem becomes a challenge-even if the only person who knows what the field really means is still with the
+                company. (And, of course, all of this changes without warning.) As a result, data has to be constantly read, munged, and written in all sorts of different
+                syntactic and semantic formats.</p>
+                <p>Then there's the matter of what comes under the term "business logic." I find this a curious term because there are few things that are less logical than
+                business logic. When you build an operating system you strive to keep the whole thing logical. But business rules are just given to you, and without major
+                political effort there's nothing you can do to change them. You have to deal with a haphazard array of strange conditions that often interact with each other
+                in surprising ways. Of course, they got that way for a reason: Some salesman negotiated to have a certain yearly payment two days later than usual because that
+                fit with his customer's accounting cycle and thus won a couple of million dollars in business. A few thousand of these one-off special cases is what leads to the 
+                <b>complex business "illogic" </b>that makes business software so difficult. In this situation you have to organize the business logic as effectively as you can, because
+                the only certain thing is that the logic will change over time.</p>
+                <p>For some people the term "enterprise application" implies a large system. However, it's important to remember that not all enterprise applications are large, 
+                even though they can provide a lot of value to the enterprise. Many people assume that, since small systems aren't large, they aren't worth bothering with, and
+                to some degree there's merit here. If a small system fails, it usually makes less noise than a big system. Still, I think such thinking tends to shortchange the
+                cumulative effect of many small projects. If you can do things that improve small projects, then that cumulative effect can be very significant on an enterprise, 
+                particularly since small projects often have disproportionate value. Indeed, one of the best things you can do is turn a large project into a small one by simplifying 
+                its architecture and process.</p>
         </section>
-    </article>
+        <a id='button_home' href='#'>^ UP ^</a>
+    </main>
     <footer>
-        <section class="pat_footer">
-            <p>Website @ 2016  by <a href="#">SUCCESS</a> - Team Success is Leader</p>
-        </section>
+            <p>Website &copy 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
     </footer>
-</body>
+    </body>
 </html>
