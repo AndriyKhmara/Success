@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <!--meta charset="UTF-8" /-  deleted because us HTML5 have this is default -->
+      <meta name="description" content="Patterns of Enterprise Application Architecture"/>
+      <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
+      <link rel="stylesheet" href="../css/bookStyle.css"/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+      <title>Patterns of Enterprise Application Architecture </title>
+</head>
+<body>
+	<article class="wrapper">
+        <section class="pat_header">
+            <h1>Patterns of Enterprise Application Architecture</h1>
+            <p>Chapter 5. Concurrency</p>
+        </section>
+        <section>
+            <h1>Remote and Local Interfaces
+            </h1>
+            <p>The primary reason that the distribution by class model doesn't work has to do with a fundamental fact of computers. A procedure call within a process is very, very fast. A procedure call between two separate processes is orders of magnitude slower. Make that a process running on another machine and you can add another order of magnitude or two, depending on the network topography involved.
+            </p>
+            <p>As a result, the interface for an object to be used remotely must be different from that for an object used locally within the same process.
+            </p>
+            <p>A local interface is best as a fine-grained interface. Thus, if I have an address class, a good interface will have separate methods for getting the city, getting the state, setting the city, setting the state, and so forth. A fine-grained interface is good because it follows the general OO principle of lots of little pieces that can be combined and overridden in various ways to extend the design into the future.</p>
+            <p>A fine-grained interface doesn't work well when it's remote. When method calls are slow, you want to obtain or update the city, state, and zip in one call rather than three. The resulting interface is coarse-grained, designed not for flexibility and extendibility but for minimizing calls. Here you'll see an interface along the lines of get-address details and update-address details. It's much more awkward to program to, but for performance you need to have it.
+            </p>
+            <p>Of course, what vendors will tell you is that there's no overhead to using their middleware for remote and local calls. If it's a local call, it's done with the speed of a local call. If it's a remote call it's done more slowly. Thus, you only pay the price of a remote call when you need one. This much is, to some extent, true, but it doesn't avoid the essential point that any object that may be used remotely should have a coarse-grained interface while every object that isn't used remotely should have a fine-grained interface. Whenever two objects communicate you have to choose which to use. If the object could ever be in separate processes you have to use the coarse-grained interface and pay the cost of the harder programming model. Obviously, it only makes sense to pay that cost when you need to, and so you need to minimize the amount of interprocess collaborations.
+            </p>
+            <p>For these reasons you can't just take a group of classes that you design in the world of a single process, throw CORBA or some such at them, and come up with a distributed model. Distribution design is more than that. If you base your distribution strategy on a classes, you'll end up with a system that does a lot of remote calls and thus needs awkward coarse-grained interfaces. In the end, even with coarse-grained interfaces on every remotable class, you'll still end up with too many remote calls and a system that's awkward to modify as a bonus.
+            </p>
+            <p>Hence, we get to my <b>First Law of Distributed Object Design:</b> Don't distribute your objects!
+            </p>
+            <p>How, then, do you effectively use multiple processors? In most cases the way to go is clustering (see <u>Figure 7.2</u>). Put all the classes into a single process and then run multiple copies of that process on the various nodes. That way each process uses local calls to get the job done and thus does things faster. You can also use fine-grained interfaces for all the classes within the process and thus get better maintainability with a simpler programming model.
+            </p>
+            <h3 class="figure">Figure 7.2. Clustering involves putting several copies of the same application on different nodes.</h3>
+            <img src="../img/book/small/chap7.2_img.png" alt="Figure 7.2"/>
+        </section>
+        <section>
+            <a href='#' class='button_home'>HOME</a>
+        </section>
+    </article>
+    <footer>
+        <section class="pat_footer">
+            <p>Website &copy 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
+        </section>
+    </footer>
+</body>
+</html>
