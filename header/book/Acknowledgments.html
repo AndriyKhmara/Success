@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="description" content="Patterns of Enterprise Application Architecture"/>
+      <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
+      <link rel="stylesheet" href="css/bookStyle.css"/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+      <title>Patterns of Enterprise Application Architecture </title>
+  </head>
+   <article class="wrapper">
+        <section class="pat_header">
+            <h1>Patterns of Enterprise Application Architecture</h1>
+            <p>Chapter 5. Concurrency</p>
+        </section>
+        <section>
+            <p>...</p>
+      <h2>Acknowledgments</h2>
+          <p>As with any book, what's written here has a great deal to do with the many people who have worked with me in various ways over the years. Lots of people have helped in
+             lots of ways. Often I don't recall important things people said that went into this book, but I can acknowledge those contributions I do remember.</p>
+          <p>I'll start with my contributors. David Rice, a colleague of mine at ThoughtWorks, has made a huge contribution — a good tenth of the book. As we worked hard
+            to hit the deadline (while he was also supporting a client), we had several late-night instant message conversations where he confessed to finally seeing
+            why writing a book is both so hard and so compulsive.</p>
+          <p>Matt Foemmel is another ThoughtWorker, and although the Arctic will need air conditioning before he writes prose for fun, he's been a great contributor of 
+             code examples (as well as a very succinct critic of the book.) I was pleased that Randy Stafford contributed <i>Service Layer</i> (133) as he's been such a strong
+             advocate for it. I'd also like to thank Edward Hieatt and Rob Mee for their contribution, which arose from Rob's noticing a gap while he was doing his review
+             of the text. He became my favorite reviewer: Not only does he notice something missing, he helps write a section to fix it!</p>
+          <p>As usual, I owe more than I can say to my first-class panel of official reviewers:</p>
+      <table>
+          <tr>
+              <td>John Brewer</td>
+              <td>Rob Mee</td>
+          </tr>
+           <tr>
+              <td>Kyle Brown</td>
+              <td>Gerard Meszarios</td>
+          </tr>
+           <tr>
+              <td>Jens Coldewey</td>
+              <td> Dirk Riehle</td>
+          </tr>
+           <tr>
+              <td>John Crupi</td>
+              <td>Randy Stafford</td>
+          </tr>
+           <tr>
+              <td>Leonard Fenster</td>
+              <td> David Siegel</td>
+          </tr>
+           <tr>
+              <td>Alan Knight</td>
+              <td> Kai Yu</td>
+          </tr>
+      </table>
+        <p>I could almost list the ThoughtWorks telephone directory here, for so many of my colleagues have helped this project by talking over their designs
+        and experiences with me. Many patterns formed in my mind because I had the opportunity to talk with the many talented designers we have, so I have 
+        little choice but to thank the whole company.</p>
+        <p>Kyle Brown, Rachel Reinitz, and Bobby Woolf have gone out of their way to have long and detailed review sessions with me in North Carolina. Their 
+        fine-tooth comb has injected all sorts of wisdom, not including this particularly heinous mixed metaphor. In particular I've enjoyed several long
+        telephone calls with Kyle that contributed more than I can list.</p>
+        <p>Early in 2000 I prepared a talk for Java One with Alan Knight and Kai Yu that was the earliest genesis of this material. As well as thanking them
+        for their help in that, I should also thank Josh Mackenzie, Rebecca Parsons, and Dave Rice for helping me refine these talks, and the ideas, later on. Jim
+        Newkirk did a great deal in helping me get used to the new world of .NET.</p>
+        <p>I've learned a lot from the many people working in this field with whom I've had good conversations and collaborations. In particular I'd like to thank
+        Colleen Roe, David Muirhead, and Randy Stafford for sharing their work on the Foodsmart example system at Gemstone. I've also had great conversations
+        at the Crested Butte workshop that Bruce Eckel has hosted and must thank all the people who attended that event in the last couple of years. Joshua 
+        Kerievsky didn't have time to do a full review, but he was an excellent patterns consultant.</p>
+        <p>As usual, I had the remarkable help of the UIUC reading group with their unique brand of no-holds-barred audio reviews. My thanks to: Ariel 
+        Gertzenstein, Bosko Zivaljevic , Brad Jones, Brian Foote, Brian Marick, Federico Balaguer, Joseph Yoder, John Brant, Mike Hewner, Ralph Johnson, 
+        and Weerasak Witthawaskul.</p>
+        <p>Dragos Manolescu, an ex-UIUC hitman, got his own group together to give me feedback. My thanks to Muhammad Anan, Brian Doyle, Emad Ghosheh, Glenn Graessle,
+        Daniel Hein, Prabhaharan Kumarakulasingam, Joe Quint, John Reinke, Kevin Reynolds, Sripriya Srinivasan, and Tirumala Vaddiraju.
+        Kent Beck has given me more good ideas than I can remember. But I do remember that he came up with the name for Special Case (496). Jim Odell was
+        responsible for getting me into the world of consulting, teaching, and writing - no acknowledgment will ever do his help justice.</p>
+        <p>As I was writing this book, I put drafts on the Web. During this time many people sent me e-mails pointing out problems, asking questions, or 
+        talking about alternatives. These people include Michael Banks, Mark Bernstein, Graham Berrisford, Bjorn Beskow, Bryan Boreham, Sean Broadley, Peris
+        Brodsky, Paul Campbell, Chester Chen, John Coakley, Bob Corrick, Pascal Costanza, Andy Czerwonka, Martin Diehl, Daniel Drasin, Juan Gomez Duaso,
+        Don Dwiggins, Peter Foreman, Russell Freeman, Peter Gassmann, Jason Gorman, Dan Green, Lars Gregori, Rick Hansen, Tobin Harris, Russel Healey,
+        Christian Heller, Richard Henderson, Kyle Hermenean, Carsten Heyl, Akira Hirasawa, Eric Kaun, Kirk Knoernschild, Jesper Ladegaard, Chris Lopez,
+        Paolo Marino, Jeremy Miller, Ivan Mitrovic, Thomas Neumann, Judy Obee, Paolo Parovel, Trevor Pinkney, Tomas Restrepo, Joel Rieder, Matthew Roberts, 
+        Stefan Roock, Ken Rosha, Andy Schneider, Alexandre Semenov, Stan Silvert, Geoff Soutter, Volker Termath, Christopher Thames, Volker Turau, Knut Wannheden,
+        Marc Wallace, Stefan Wenig, Brad Wiemerslage, Mark Windholtz, Michael Yoon.</p>
+        <p>There are many others who gave input whose names I either never knew or can't remember, but my thanks is no less heartfelt.</p>
+        <p>My biggest thanks is, as ever, to my wife Cindy, whose company I appreciate much more than anyone can appreciate this book.</p>
+     </section>
+        <section>
+            <a href='#' class='button_home'>HOME</a>
+        </section>
+    </article>
+    <footer>
+        <section class="pat_footer">
+            <p>Website @ 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
+        </section>
+    </footer>
+</body>
+</html>

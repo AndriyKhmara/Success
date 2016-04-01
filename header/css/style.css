@@ -1,56 +1,145 @@
+body {
+
+    background-color: #183026;
+    background-image: url("../img/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 0;
+    background-attachment: fixed;
+    font-family: "Source Sans Pro",sans-serif;
+    font-size: 18pt;
+    line-height: 1.75em;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #3a3939;
+    text-shadow: 0px 0px 0.5px rgba(58,57,57,0.25);
+    -webkit-text-stroke: 0.25px;    
+}
+}
 .wrapper{
-	min-width: 1024px;
+	min-width: 480px;
 	max-width: 1980px;
 }
 nav .author ul{
-list-style: none;
-border-bottom: 5px solid #ffbf00;
-border-top: 1px solid #ffbf00;
-height: 100px;
-background: #555555;
-padding: 30px;
+	list-style: none;
+	border-bottom: 5px solid #ffbf00;
+	border-top: 1px solid #ffbf00;
+	height: 100px;
+	background: #555555;
+	padding: 20px;
 }
 .author  li {
-display: inline;
-float: left;
-width: 250px;
-margin: 0;
+	display: inline-block;
+	float: left;
+	width: 250px;	
+	margin: 0 3%;
 }
 .author ul a {
-display: block;	
-color: #f0f8ff;
-text-decoration: none;
-background: #444444;
-border: 1px solid #ffbf00;
-text-decoration: none;
-font-size:18px;
-font-family:arial;
-line-height:50px;
-text-align:center;
-border-right:1px solid #444444;
-border-left:1px solid #444444;
-border-top: 5px solid #444444;
-border-bottom: 5px solid #444444;
-border-radius: 25px;
+	display: block;	
+	color: #f0f8ff;
+	text-decoration: none;
+	background: #444444;
+	border: 1px solid #ffbf00;
+	text-decoration: none;
+	font-size:18px;
+	font-family:arial;
+	line-height:50px;
+	text-align:center;
+	border-right:1px solid #444444;
+	border-left:1px solid #444444;
+	border-top: 5px solid #444444;
+	border-bottom: 5px solid #444444;
+	border-radius: 25px;
 }
 .author ul li a:hover {
-border: 1px solid #ffbf00; 
-background:#ffbf00;
-font-size: 18px;
-font-weight:bold;
-width: 230px;
-border-radius: 25px;
-margin: 0px auto;
+	border: 1px solid #ffbf00; 
+	background:#ffbf00;
+	font-size: 18px;
+	font-weight:bold;
+	width: 230px;
+	border-radius: 25px;
+	margin: 0px auto;
 }
-/*-------------------------------для наглядностi-----------------------------------*/
-.body {
-	height: 500px;
+/*-------------------------------Content-------------------------------------------*/
+.content {
+	min-width: 480px;
+	width: 80%;
+	margin: 0 auto;
+	padding-bottom: 10%;
+	padding-top: 10px;
+}
+.row{
+	display: table-row;	
+}
+.row div {
+	display: table-cell;	
+}
+.row div img {
+	width: 100%;
+	position: relative;
+	padding: 0% 1% 0% 1%;	
+}
+.row div p {
+	position: relative;
+	display: block;
+	text-align: center;
+	margin-top: -55.5%;
+}
+.centralIMG {
+	width: 25%;
+	position: relative;
+	margin-left: 37.5%;
+	margin-top: -37.5%;	
+}
+.centralIMG img {
+	width: 100%;
+	border-radius: 50%;
+}
+.centralIMG p {
+	position: relative;
+	display: block;
+	text-align: center;
+	margin-top: -60.5%;
+}
+/*-------------------------------Content styles-----------------------------*/
+
+.morph :hover {
+  -webkit-filter: grayscale(100%);
+}
+/*-----------------------Button-------------------------------*/
+.button{
+ text-decoration:none; 
+ text-align:center; 
+ padding:11px 32px; 
+ border:solid 1px #f70303; 
+ -webkit-border-radius:4px;
+ -moz-border-radius:4px; 
+ border-radius: 4px; 
+ font:18px Arial, Helvetica, sans-serif; 
+ font-weight:bold; 
+ color:#E5FFFF; 
+ background-color:#c7683b; 
+ background-image: -moz-linear-gradient(top, #c7683b 0%, #ff6600 100%); 
+ background-image: -webkit-linear-gradient(top, #c7683b 0%, #ff6600 100%); 
+ background-image: -o-linear-gradient(top, #c7683b 0%, #ff6600 100%); 
+ background-image: -ms-linear-gradient(top, #c7683b 0% ,#ff6600 100%); 
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6600', endColorstr='#ff6600',GradientType=0 ); 
+ background-image: linear-gradient(top, #c7683b 0% ,#ff6600 100%);   
+ -webkit-box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff; 
+ -moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;  
+ box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;    
+  }
+.content_but {
+	padding-bottom: 30px;
+	text-align: center;
 }
 /*----------------------------------Fotter----------------------------------*/
 footer{
+	
 	height: 90px;
 	background-color: #444444;
 	border-top: 3px solid #ffbf00;
+	display: block;
 }
 footer p {
 	text-align: center;
