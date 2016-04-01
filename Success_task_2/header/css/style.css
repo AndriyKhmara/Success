@@ -27,13 +27,12 @@ nav .author ul{
 	height: 100px;
 	background: #555555;
 	padding: 20px;
+	text-align: center;
 }
 .author  li {
 	display: inline-block;
-	float: left;
-	width: 250px;
-	
-	margin: 0 3%;
+	width: 17%;
+	margin: 0 auto;
 }
 .author ul a {
 	display: block;	
@@ -57,7 +56,7 @@ nav .author ul{
 	background:#ffbf00;
 	font-size: 18px;
 	font-weight:bold;
-	width: 230px;
+	
 	border-radius: 25px;
 	margin: 0px auto;
 }
