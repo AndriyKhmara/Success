@@ -9,11 +9,23 @@
       <title>Patterns of Enterprise Application Architecture </title>
 </head>
 <body>
-	<article class="wrapper">
-        <section class="pat_header">
+    <main>
+        <header>
             <h1>Patterns of Enterprise Application Architecture</h1>
             <p>Chapter 5. Concurrency</p>
-        </section>
+        </header>
+        <nav>
+                <li class="menu_li"><a href="../index.html" title="Main page">HOME</a></li>
+				<li class="menu_li"><a href="../book/pattern1.html" title="go to Pattern 1" rel="details">PATTERN 1</a></li>
+				<li class="menu_li"><a href="../book/pattern2.html" title="go to Pattern 2" rel="details">PATTERN 2</a></li>
+				<li class="menu_li"><a href="../book/pattern3.html" title="go to Pattern 3" rel="details">PATTERN 3</a></li>
+				<li class="menu_li"><a href="../book/pattern4.html" title="go to Pattern 4" rel="details">PATTERN 4</a></li>
+				<li class="menu_li"><a href="../book/pattern5.html" title="go to Pattern 5" rel="details">PATTERN 5</a></li>
+				<li class="menu_li"><a href="../book/pattern6.html" title="go to Pattern 6" rel="details">PATTERN 6</a></li>
+				<li class="menu_li"><a href="../book/pattern7.html" title="go to Pattern 7" rel="details">PATTERN 7</a></li>
+				<li class="menu_li"><a href="../book/pattern8.html" title="go to Pattern 8" rel="details">PATTERN 8</a></li>
+				<li><a href="../book/galery.html" title="go to Galery" rel="details">GALERY</a></li>
+        </nav>
         <section>
             <p>...</p>
             <h2>Transactions</h2>
@@ -86,15 +98,12 @@
                 <p>The tricky ACID property to enforce with business transactions is isolation. Failures of isolation lead to failures of consistency. Consistency dictates that a business transaction not leave the record set in an invalid state. Within a single transaction the application’s responsibility in supporting consistency is to enforce all available business rules. Across multiple transactions the application’s responsibility is to ensure that one session doesn’t step all over another session’s changes, leaving the record set in the invalid state of having lost a user’s work.</p>
                 <p>As well as the obvious problems of clashing updates, there are the more subtle problems of inconsistent reads. When data is read over several system transactions, there’s no guarantee that it will be consistent. The different reads can even introduce data in memory that’s sufficiently inconsistent to cause application failures.</p>
                 <p>Business transactions are closely tied to sessions. In the user’s view each session is a sequence of business transactions (unless they’re only reading data), so we usually make the assumption that all business transactions execute in a single client session. While it’s certainly possible to design a system that has multiple sessions for one business transaction, that’s a very good way of getting yourself badly confused—so we’ll assume that you won’t do that.</p>
+
         </section>
-        <section>
-            <a href='#' class='button_home'>HOME</a>
-        </section>
-    </article>
+        <a id='button_home' href='#'>^ UP ^</a>
+    </main>
     <footer>
-        <section class="pat_footer">
             <p>Website &copy 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
-        </section>
     </footer>
 </body>
 </html>
