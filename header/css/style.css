@@ -61,51 +61,91 @@ nav .author ul{
 	margin: 0px auto;
 }
 /*-------------------------------Content-------------------------------------------*/
-.content {
-	min-width: 480px;
-	width: 80%;
-	margin: 0 auto;
-	padding-bottom: 10%;
-	padding-top: 10px;
+
+.row {
+	display: table-row;
 }
-.row{
-	display: table-row;	
-}
-.row div {
-	display: table-cell;	
-}
-.row div img {
-	width: 100%;
+
+section{
+	display: table;
 	position: relative;
-	padding: 0% 1% 0% 1%;	
+	width: 85%;
+	height: 200px;
+	margin: 15px auto;
 }
-.row div p {
-	position: relative;
-	display: block;
-	text-align: center;
-	margin-top: -55.5%;
-}
-.centralIMG {
+
+
+.cell{
+	display: table-cell;
 	width: 25%;
-	position: relative;
-	margin-left: 37.5%;
-	margin-top: -37.5%;	
+	background-color: yellow;
+	border: 1px solid black;	
+	  -webkit-background-size: cover;
+  	background-size: cover;
 }
-.centralIMG img {
-	width: 100%;
-	border-radius: 50%;
+#num_1{
+	background: url('../img/1.jpg');
 }
-.centralIMG p {
-	position: relative;
-	display: block;
+#num_2{
+	background: url('../img/2.jpg');
+}
+#num_3{
+	background: url('../img/3.jpg');
+}
+#num_4{
+	background: url('../img/4.jpg');
+}
+#num_5{
+	background: url('../img/5.jpg');
+}
+#num_6{
+	background: url('../img/6.jpg');
+}
+#num_7{
+	background: url('../img/7.jpg');
+}
+#num_8{
+	background: url('../img/8.jpg');
+}
+section .row .cell h2{
+	margin: 160px 0;
+	text-transform: uppercase;
 	text-align: center;
-	margin-top: -60.5%;
+	font-size: 18px;
+	font-weight: bold;
+}
+.cell a {
+	text-decoration: none;
+	color: yellow;
+}
+span{
+	display: inline-block;
+	color: inherit;
+}
+section .circle{
+	background: url('../img/17.jpg');
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 216px;
+	height: 216px;
+	margin: -108px 0 0 -108px;
+	border-radius: 50%;
+	background-color: rgba(28,28,29, 0.65);
+}
+section .circle h1{
+	font-size: 18px;
+	margin-top: 60px;
+	padding: 4%;
+	color: #eaf8bf;
+	text-align: center;
+	line-height: normal;
+	text-transform: uppercase;
+	text-shadow: 0 0 5px #eca400;
 }
 /*-------------------------------Content styles-----------------------------*/
 
-.morph :hover {
-  -webkit-filter: grayscale(100%);
-}
+
 /*-----------------------Button-------------------------------*/
 .button{
  text-decoration:none; 
