@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Patterns of Enterprise Application Architecture"/>
+        <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
+        <link rel="stylesheet" href="../css/bookStyle.css"/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'/>
+        <title>Patterns of Enterprise Application Architecture </title>
+	</head>
+	<body>
+        <main>
+            <header>
+                <h1>Patterns of Enterprise Application Architecture</h1>
+                <p>Chapter 3. Execution Contexts</p>
+            </header>
+            <nav>
+                <ul>
+                    <li class="menu_li"><a href="../index.html" title="Main page">HOME</a></li>
+                    <li class="menu_li"><a href="../book/pattern1.html" title="go to Pattern 1">PATTERN 1</a></li>
+                    <li class="menu_li"><a href="../book/pattern2.html" title="go to Pattern 2">PATTERN 2</a></li>
+                    <li class="menu_li"><a href="../book/pattern3.html" title="go to Pattern 3">PATTERN 3</a></li>
+                    <li class="menu_li"><a href="../book/pattern4.html" title="go to Pattern 4">PATTERN 4</a></li>
+                    <li class="menu_li"><a href="../book/pattern5.html" title="go to Pattern 5">PATTERN 5</a></li>
+                    <li class="menu_li"><a href="../book/pattern6.html" title="go to Pattern 6">PATTERN 6</a></li>
+                    <li class="menu_li"><a href="../book/pattern7.html" title="go to Pattern 7">PATTERN 7</a></li>
+                    <li class="menu_li"><a href="../book/pattern8.html" title="go to Pattern 8">PATTERN 8</a></li>
+                    <li><a href="../book/galery.html" title="go to Galery">GALERY</a></li>
+                </ul>
+            </nav>
+            <section>
+                <p>...</p>
+                <h3>Execution Contexts</h3>
+                    <p>Whenever processing occurs in a system, it occurs in some context and usually in more than one. There's no
+                    standard terminology for execution contexts, so here we'll define the ones that we're assuming in this book.</p>
+                    <p>From the perspective of interacting with the outside world, two important contexts are the request and the
+                    session. A request corresponds to a single call from the outside world which the software works on and for
+                    which it optionally sends back a response. During a request the processing is largely in the server's court and
+                    the client is assumed to wait for a response. Some protocols allow the client to interrupt a request before it
+                    gets a response, but this is fairly rare. More often a client may issue another request that may interfere with
+                    one it just sent. So a client may ask to place an order and then issue a separate request to cancel that order.
+                    From the client's view the two requests may be obviously connected, but depending on your protocol that
+                    may not be so obvious to the server.</p>
+                    <p>A session is a long-running interaction between a client and a server. It may consists of a single request,
+                    but more commonly it consists of a series of requests that the user regards as a consistent logical sequence.
+                    Commonly a session will begin with a user logging in and doing various bits of work that may involve issuing
+                    queries and one or more business transactions (to be discussed shortly). At the end of the session the user
+                    logs out, or he may just go away and assume that the system interprets that as logging out.</p>
+                    <p>Server software in an enterprise application sees both requests and sessions from two angles, as the server
+                    from the client and as the client to other systems. Thus, you'll often see multiple sessions: HTTP sessions
+                    from the client and database sessions with various databases.</p>
+                    <p>Two important terms from operating systems are processes and threads. A process is a, usually
+                    heavyweight, execution context that provides a lot of isolation for the internal data it works on. A thread is
+                    a lighter-weight active agent that's set up so that multiple threads can operate in a single process. People
+                    like threads because they support multiple requests within a single process—which is good utilization of
+                    resources. However, threads usually share memory, and such sharing leads to concurrency problems. Some
+                    environments allow you to control what data a thread may access, allowing you to have isolated threads
+                    that don't share memory.</p>
+                    <p>The difficulty with execution contexts comes when they don't line up as well as we might like. In theory each
+                    session would have an exclusive relationship with a process for its whole lifetime. Since processes are
+                    properly isolated from each other, this would help reduce concurrency conflicts. Currently we don't know of
+                    any server tools that allow you to work this way. A close alternative is to start a new process for each
+                    request, which was the common mode for early Perl Web systems. People tend to avoid that now because
+                    starting processes tie up a lot of resources, but it's quite common for systems to have a process handle only
+                    one request at a time—and that can save many concurrency headaches.</p>
+                    <p>When you're dealing with databases there's another important context—a transaction. Transactions pull
+                    together several requests that the client wants treated as if they were a single request. They can occur from
+                    the application to the database (a system transaction) or from the user to an application (a business
+                    transaction). We'll dig into these terms more later on.</p>
+            </section>
+            <a id='button_home' href='#'>^ UP ^</a>
+        </main>
+        <footer>
+                <p>Website &copy; 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
+        </footer>
+	</body>
+</html>
