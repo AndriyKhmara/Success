@@ -35,6 +35,29 @@ main header h1, main header p {
     margin: 0em;
     padding: 0em;
 }
+main nav {
+    text-align: center;
+    background: #E4E537;
+    background: linear-gradient(to bottom, #E4E537, #FB5A32);
+    box-shadow: 0 .5em 1.5em  #424242;
+}
+main nav ul {
+    margin-top: .7em;
+
+}
+main nav li {
+    display: inline-block;
+    min-width: 65px;
+    padding: .3em;
+}
+li a,li a:hover,li a:visited {
+    text-decoration: none;
+    color: #3F3F46;
+}
+li a:hover {
+    border-top: .2em double #8B0404;
+    color: #8B0404;
+}
 table {
     border-collapse: collapse;
     min-width: 30em;
@@ -71,6 +94,11 @@ footer a, footer a:visited {
 }
 footer a:hover {
     color: #8B0404; /*Color link in sight*/
+}
+.menu_li {
+    background-image: url(../img/menu_li.png);
+    background-repeat: no-repeat;
+    background-position: right 50%;
 }
 #button_home {
    border: 1px solid #151058;
@@ -121,29 +149,4 @@ footer a:hover {
    background: -o-linear-gradient(top, #FF4A07, #E4E537);
    background-image: -ms-linear-gradient(top, #FF4A07 0%, #E4E537 100%);
    color: #e7e7ee;
-}
-main nav {
-    text-align: center;
-    margin-top: 0.7em;
-    background: #E4E537;
-    background: linear-gradient(to bottom, #E4E537, #FB5A32);
-    box-shadow: 0 .5em 1.5em  #424242;
-}
-main nav li {
-    display: inline-block;
-    min-width: 65px;
-    padding: .3em;
-}
-.menu_li {
-    background-image: url(../img/menu_li.png);
-    background-repeat: no-repeat;
-    background-position: right 50%;
-}
-li a,li a:hover,li a:visited {
-    text-decoration: none;
-    color: #3F3F46;
-}
-li a:hover {
-    border-top: .2em double #8B0404;
-    color: #8B0404;
 }
