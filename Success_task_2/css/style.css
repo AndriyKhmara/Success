@@ -114,6 +114,7 @@ section{
 }
 section .row .cell h2{
 	font-family: 'Lobster', cursive;
+	background:rgba(71, 82, 89, 0.85);
 	margin: 160px 0;
 	text-transform: uppercase;
 	text-align: center;
@@ -122,8 +123,10 @@ section .row .cell h2{
 	color: #eaf8bf
 }
 .cell a {
-	text-decoration: none;
-	
+	text-decoration: none;	
+}
+section .row .cell h2:hover {
+	background:rgba(50, 82, 89, 1);
 }
 span{
 	display: inline-block;
