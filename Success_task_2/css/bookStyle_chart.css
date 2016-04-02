@@ -68,27 +68,43 @@ table, th, td {
     border: 1px solid #424242;
     padding: 0.5em;
 }
-#num_1 {
-  background-image: url('../gal/img/7.png');
-  width: 45%  
+.container{
+    display: table;
+    width: 90%;
+    margin: 0 auto;
 }
 
-#num_3 {
-  background-image: url('../gal/img/14.png');
-  width: 45%;
-}
-#num_4 {
-  background-image: url('../gal/img/12.png');
-}
-#num_6 {
-  background-image: url('../gal/img/3.png');
-}
-#num_7 {
-  background-image: url('../gal/img/4.png');
+.pic_view_container img{
+    width: 70%;
+    display: block;
+    margin: 0 auto;
 }
 
-#num_9 {
-  background-image: url('../gal/img/6.png');
+
+.row{
+    display: table-row;
+    width: 100%;
+}
+.col{
+    display: table-cell;
+    width: 32%;
+    padding: 1%;
+    text-align: center;
+}
+main .container img{
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+}
+
+main .container a{
+    color: #EAF8BF;
+}
+
+main .container a:hover{
+    color: #ECA400;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 ul {
 	list-style: circle outside;
@@ -171,7 +187,4 @@ footer a:hover {
    background: -o-linear-gradient(top, #FF4A07, #E4E537);
    background-image: -ms-linear-gradient(top, #FF4A07 0%, #E4E537 100%);
    color: #e7e7ee;
-}
-.center {
-  text-align: center;
 }
