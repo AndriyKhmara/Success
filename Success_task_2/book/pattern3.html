@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8"/>
-		<title>Chapter 3:Input Controller Patterns</title>
-		<link rel="stylesheet" href="cssBook/Page_style.css" />
+        <meta charset="UTF-8" />
+        <meta name="description" content="Patterns of Enterprise Application Architecture"/>
+        <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
+        <link rel="stylesheet" href="../css/bookStyle.css"/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'/>
+        <title>Patterns of Enterprise Application Architecture </title>
 	</head>
 	<body>
-
-		<div class="main">
-			<div class="header"><h1>Chapter 3<h1></div>
-			<h3>Input Controller Patterns</h3>
-			<p>There are two patterns for the input controller. The most common is an input controller object for every page
-			on your Web site. In the simplest case this Page Controller can be a server page itself, combining the
-			roles of view and input controller. In many implementations it makes things easier to split the input
-			controller into a separate object. The input controller can then create appropriate models to do the
-			processing and instantiate a view to return the result. Often you'll find that there isn't quite a one-to-one
-			relationship between Page Controllers and views. A more precise thought is that you have a Page
-			Controller for each action, where an action is a button or link. Most of the time the actions correspond
-			to pages, but occasionally they don't—such as a link that may go to a couple of different pages depending
-			some condition.</p>
-			<p>With any input controller there are two responsibilities—handling the HTTP request and deciding what to do
-			with it—and it often makes sense to separate them. A server page can handle the request, delegating a
-			separate helper object to decide what to do with it. Front Controller goes further in this separation by
-			having only one object handling all requests. This single handler interprets the URL to figure out what kind of
-			request it's dealing with and creates a separate object to process it. In this way you can centralize all HTTP
-			handling within a single object, avoiding the need to reconfigure the Web server whenever you change the
-			action structure of the site.</p>
-		</div>
+        <main>
+            <header>
+                <h1>Patterns of Enterprise Application Architecture</h1>
+                <p>Chapter 3. Input Controller Patterns</p>
+            </header>
+            <nav>
+                <ul>
+                    <li class="menu_li"><a href="../index.html" title="Main page">HOME</a></li>
+                    <li class="menu_li"><a href="../book/pattern1.html" title="go to Pattern 1">PATTERN 1</a></li>
+                    <li class="menu_li"><a href="../book/pattern2.html" title="go to Pattern 2">PATTERN 2</a></li>
+                    <li class="menu_li"><a href="../book/pattern3.html" title="go to Pattern 3">PATTERN 3</a></li>
+                    <li class="menu_li"><a href="../book/pattern4.html" title="go to Pattern 4">PATTERN 4</a></li>
+                    <li class="menu_li"><a href="../book/pattern5.html" title="go to Pattern 5">PATTERN 5</a></li>
+                    <li class="menu_li"><a href="../book/pattern6.html" title="go to Pattern 6">PATTERN 6</a></li>
+                    <li class="menu_li"><a href="../book/pattern7.html" title="go to Pattern 7">PATTERN 7</a></li>
+                    <li class="menu_li"><a href="../book/pattern8.html" title="go to Pattern 8">PATTERN 8</a></li>
+                    <li><a href="../book/galery.html" title="go to Galery">GALERY</a></li>
+                </ul>
+            </nav>
+            <section>
+                <p>...</p>
+                <h3>Input Controller Patterns</h3>
+                    <p>There are two patterns for the input controller. The most common is an input controller object for every page
+                    on your Web site. In the simplest case this Page Controller can be a server page itself, combining the
+                    roles of view and input controller. In many implementations it makes things easier to split the input
+                    controller into a separate object. The input controller can then create appropriate models to do the
+                    processing and instantiate a view to return the result. Often you'll find that there isn't quite a one-to-one
+                    relationship between Page Controllers and views. A more precise thought is that you have a Page
+                    Controller for each action, where an action is a button or link. Most of the time the actions correspond
+                    to pages, but occasionally they don't—such as a link that may go to a couple of different pages depending
+                    some condition.</p>
+                    <p>With any input controller there are two responsibilities—handling the HTTP request and deciding what to do
+                    with it—and it often makes sense to separate them. A server page can handle the request, delegating a
+                    separate helper object to decide what to do with it. Front Controller goes further in this separation by
+                    having only one object handling all requests. This single handler interprets the URL to figure out what kind of
+                    request it's dealing with and creates a separate object to process it. In this way you can centralize all HTTP
+                    handling within a single object, avoiding the need to reconfigure the Web server whenever you change the
+                    action structure of the site.</p>
+            </section>
+            <a id='button_home' href='#'>^ UP ^</a>
+        </main>
+        <footer>
+                <p>Website &copy; 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
+        </footer>
 	</body>
 </html>
