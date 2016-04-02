@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--meta charset="UTF-8" /-  deleted because us HTML5 have this is default -->
+        <meta name="description" content="Patterns of Enterprise Application Architecture"/>
+        <meta name="keywords" content="Patterns of Enterprise Application Architecture, Martin Fowler"/>	
+        <link rel="stylesheet" href="../css/bookStyle.css"/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'/>
+        <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'/>
+        <title>Patterns of Enterprise Application Architecture </title>
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>Patterns of Enterprise Application Architecture</h1>
+                <p>Chapter 7. Distribution Strategies</p>
+            </header>
+            <nav>
+                <ul>
+                    <li class="menu_li"><a href="../index.html" title="Main page">HOME</a></li>
+                    <li class="menu_li"><a href="../book/pattern1.html" title="go to Pattern 1">Acknowledgments</a></li>
+                    <li class="menu_li"><a href="../book/pattern2.html" title="go to Pattern 2">Enterprise Applications</a></li>
+                    <li class="menu_li"><a href="../book/pattern3.html" title="go to Pattern 3">Input Controller Patterns</a></li>
+                    <li class="menu_li"><a href="../book/pattern4.html" title="go to Pattern 4">Execution Contexts</a></li>
+                    <li class="menu_li"><a href="../book/pattern5.html" title="go to Pattern 5">Transactions</a></li>
+                    <li class="menu_li"><a href="../book/pattern6.html" title="go to Pattern 6">Further Reading</a></li>
+                    <li class="menu_li"><a href="../book/pattern7.html" title="go to Pattern 7">The Allure of Distributed Objects</a></li>
+                    <li class="menu_li"><a href="../book/pattern8.html" title="go to Pattern 8">Remote and Local Interfaces</a></li>
+                    <li><a href="../gal/chart.html" title="go to Galery">GALERY</a></li>
+                </ul>
+            </nav>
+            <section>
+                <p>...</p>
+                <h2>The Allure of Distributed Objects</h2>
+                    <p>Objects have been around for a while, and sometimes it seems that, ever since they were created, folks have wanted to distribute them. However, distribution of objects, or indeed of anything else, has a lot more pitfalls than many people realize [<u>Waldo et al.</u>], especially when they're under the influence of vendors' cozy brochures. This chapter is about some of these hard lessons I've seen many of my clients learn the hard way.
+                    </p>
+                <h2>The Allure of Distributed Objects</h2>
+                    <p>There is a recurring presentation that I used to see two or three times a year during design reviews. Proudly the system architect of a new OO system lays out his plan for a new distributed object system—let's pretend it's a some kind of ordering system. He shows me a design that looks rather like Figure 7.1. With separate remote objects for customers, orders, products, and deliveries. Each one is a separate component that can be placed on a separate processing node.</p>
+                    <h3 class="figure">Figure 7.1. Distribute an application by putting different components on different nodes.
+                    </h3>
+                    <a href="../gal/chart1.html"><img src="../gal/img/7.png" alt="Figure 7.1"/></a>
+                    <p>I ask, "Why do you do this?"</p>
+                    <p>"Performance, of course," the architect replies, looking at me a little oddly. "We can run each component on a separate box. If one component gets too busy we add extra boxes for it so we can load-balance our application." The look is now curious as if he wonders if I really know anything about real distributed object stuff at all.
+                    </p>
+                    <p>Meanwhile I'm faced with an interesting dilemma. Do I just say out and out that this design sucks like an inverted hurricane and get shown the door immediately? Or do I slowly try to show my client the light? The latter is more remunerative but much tougher since the client is usually very pleased with his architecture, and it takes a lot to give up on a fond dream.
+                    </p>
+                    <p>So assuming you haven't shown this book the door I guess you'll want to know why this distributed architecture sucks. After all, many tool vendors will tell you that the whole point of distributed objects is that you can take a bunch of objects and position them as you like on processing nodes. Also, their powerful middleware provides transparency. Transparency allows objects to call each other within a process or between a process without having to know if the callee is in the same process, in another process, or on
+                    another machine.</p>
+                    <p>Transparency is valuable, but while many things can be made transparent in distributed objects, performance isn't usually one of them. Although our prototypical architect was distributing objects the way he was for performance reasons, in fact his design will usually cripple performance, make the system much harder to build and deploy, or, usually, do both.
+                    </p>
+            </section>
+            <a id='button_home' href='#'>^ UP ^</a>
+        </main>
+        <footer>
+                <p>Website &copy; 2016 by <a href="#">SUCCESS</a> - Team Success is Leader</p>
+        </footer>
+    </body>
+</html>
